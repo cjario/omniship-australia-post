@@ -1,8 +1,6 @@
 <?php namespace Omniship\AustraliaPost\Message;
 
 use Omniship\Common\Message\ResponseInterface;
-use PhpSigep\Model\CalcPrecoPrazo;
-use PhpSigep\Services\SoapClient\Real;
 
 class AustraliaPostQuoteRequest extends AbstractRequest
 {
