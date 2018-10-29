@@ -15,9 +15,26 @@ use Symfony\Component\HttpFoundation\ParameterBag;
  */
 class Carrier extends AbstractCarrier
 {
+
     public function getName()
     {
         return 'Australia Post';
+    }
+
+    /**
+     * @return string
+     */
+    public function getApiKey()
+    {
+        return $this->getParameter('apiKey');
+    }
+    /**
+     * @param  string $value
+     * @return $this
+     */
+    public function setApiKey($value)
+    {
+        return $this->setParameter('apiKey', $value);
     }
 
     /**
@@ -41,47 +58,19 @@ class Carrier extends AbstractCarrier
 
         Helper::initialize($this, $parameters);
 
-        $this->bootstrap();
 
         return $this;
     }
 
-    private function bootstrap()
-    {
-        $config = new Config();
-        $config->setAccessData($this->parameters->get('accessData'));
-        $config->setEnv($this->parameters->get('env'));
-        $config->setCacheOptions(
-            array(
-                'storageOptions' => array(
-                    // Qualquer valor setado neste atributo ser� mesclado ao atributos das classes
-                    // "\PhpSigep\Cache\Storage\Adapter\AdapterOptions" e "\PhpSigep\Cache\Storage\Adapter\FileSystemOptions".
-                    // Por tanto as chaves devem ser o nome de um dos atributos dessas classes.
-                    'enabled' => false,
-                    'ttl' => 10, // "time to live" de 10 segundos
-                    'cacheDir' => sys_get_temp_dir(), // Opcional. Quando n�o inforado � usado o valor retornado de "sys_get_temp_dir()"
-                ),
-            )
-        );
-        Bootstrap::start($config);
-    }
-
     public function getDefaultParameters()
     {
-        $dimensao = new Dimensao();
-        $dimensao->setTipo(Dimensao::TIPO_PACOTE_CAIXA);
-        $dimensao->setAltura(15); // em cent�metros
-        $dimensao->setComprimento(17); // em cent�metros
-        $dimensao->setLargura(12); // em cent�metros
-
         $settings = parent::getDefaultParameters();
-        $settings['accessData'] = new AccessDataHomologacao();
-        $settings['env'] = Config::ENV_DEVELOPMENT;
-        $settings['services'] = ServicoDePostagem::getAll();
+        // $settings['env'] = Config::ENV_DEVELOPMENT;
+        // $settings['services'] = ServicoDePostagem::getAll();
         $settings['cepOrigem'] = '87013-210';
         $settings['cepDestino'] = '87509-645';
         $settings['ajustarDimensaoMinima'] = true;
-        $settings['dimensao'] = $dimensao;
+        // $settings['dimensao'] = $dimensao;
         $settings['peso'] = 0.150; // 150 gramas
 
         return $settings;
@@ -89,7 +78,7 @@ class Carrier extends AbstractCarrier
 
     public function quote(array $parameters = [])
     {
-        return $this->createRequest('\Omniship\AustraliaPost\Message\AustraliaPostQuoteRequest', $parameters);
+        return $this->createRequest('\Omniship\AustraliaPost\Message\AustraliaPostBoxRequest', $parameters);
     }
 
     public function track(array $options = [])
