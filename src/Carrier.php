@@ -76,9 +76,19 @@ class Carrier extends AbstractCarrier
         return $settings;
     }
 
-    public function quote(array $parameters = [])
+    public function box(array $parameters = [])
     {
         return $this->createRequest('\Omniship\AustraliaPost\Message\AustraliaPostBoxRequest', $parameters);
+    }
+
+    public function service(array $parameters = [])
+    {
+        return $this->createRequest('\Omniship\AustraliaPost\Message\AustraliaPostServiceRequest', $parameters);
+    }
+
+    public function postage(array $parameters = [])
+    {
+        return $this->createRequest('\Omniship\AustraliaPost\Message\AustraliaPostPostageRequest', $parameters);
     }
 
     public function track(array $options = [])
