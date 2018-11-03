@@ -1,11 +1,11 @@
-<?php namespace Omniship\AustraliaPost\Message;
+<?php namespace Omniship\AustraliaPost\Message\Domestic;
 
 use Omniship\Common\Message\ResponseInterface;
+use Omniship\AustraliaPost\Message\AbstractRequest;
+
 
 class AustraliaPostServiceRequest extends AbstractRequest
 {
-
-
     protected $endpoint = '/postage/parcel/domestic/service.json';
 
     /**
@@ -27,22 +27,14 @@ class AustraliaPostServiceRequest extends AbstractRequest
      */
     public function sendData($data)
     {
-        // Define the service input parameters
-        $fromPostcode = '2000';
-        $toPostcode = '3000';
-        $parcelLengthInCMs = 22;
-        $parcelWidthInCMs = 16;
-        $parcelHeighthInCMs = 7.7;
-        $parcelWeightInKGs = 1.5;
-
         // Set the query params
         $queryParams = array(
-            "from_postcode" => $fromPostcode,
-            "to_postcode" => $toPostcode,
-            "length" => $parcelLengthInCMs,
-            "width" => $parcelWidthInCMs,
-            "height" => $parcelHeighthInCMs,
-            "weight" => $parcelWeightInKGs
+            "from_postcode" => $data['fromPostcode'],
+            "to_postcode" => $data['toPostcode'],
+            "length" => $data['parcelLengthInCMs'],
+            "width" => $data['parcelWidthInCMs'],
+            "height" => $data['parcelHeighthInCMs'],
+            "weight" => $data['parcelWeightInKGs']
         );
 
         $params = $this->endpoint . '?'. http_build_query($queryParams);

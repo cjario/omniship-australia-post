@@ -1,6 +1,7 @@
-<?php namespace Omniship\AustraliaPost\Message;
+<?php namespace Omniship\AustraliaPost\Message\Domestic;
 
 use Omniship\Common\Message\ResponseInterface;
+use Omniship\AustraliaPost\Message\AbstractRequest;
 
 class AustraliaPostBoxRequest extends AbstractRequest
 {

@@ -13,12 +13,12 @@ use Symfony\Component\HttpFoundation\ParameterBag;
  * @see https://developers.auspost.com.au/apis/pac/getting-started
  *
  */
-class Carrier extends AbstractCarrier
+class InternationalCarrier extends AbstractCarrier
 {
 
     public function getName()
     {
-        return 'Australia Post';
+        return 'Australia Post (International)';
     }
 
     /**
@@ -65,33 +65,21 @@ class Carrier extends AbstractCarrier
     public function getDefaultParameters()
     {
         $settings = parent::getDefaultParameters();
-        // $settings['env'] = Config::ENV_DEVELOPMENT;
-        // $settings['services'] = ServicoDePostagem::getAll();
-        $settings['cepOrigem'] = '87013-210';
-        $settings['cepDestino'] = '87509-645';
-        $settings['ajustarDimensaoMinima'] = true;
-        // $settings['dimensao'] = $dimensao;
-        $settings['peso'] = 0.150; // 150 gramas
-
         return $settings;
     }
 
     public function box(array $parameters = [])
     {
-        return $this->createRequest('\Omniship\AustraliaPost\Message\AustraliaPostBoxRequest', $parameters);
+        return $this->createRequest('\Omniship\AustraliaPost\Message\International\AustraliaPostBoxRequest', $parameters);
     }
 
     public function service(array $parameters = [])
     {
-        return $this->createRequest('\Omniship\AustraliaPost\Message\AustraliaPostServiceRequest', $parameters);
+        return $this->createRequest('\Omniship\AustraliaPost\Message\International\AustraliaPostServiceRequest', $parameters);
     }
 
     public function postage(array $parameters = [])
     {
-        return $this->createRequest('\Omniship\AustraliaPost\Message\AustraliaPostPostageRequest', $parameters);
-    }
-
-    public function track(array $options = [])
-    {
+        return $this->createRequest('\Omniship\AustraliaPost\Message\International\AustraliaPostPostageRequest', $parameters);
     }
 }

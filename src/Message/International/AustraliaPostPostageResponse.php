@@ -1,8 +1,8 @@
-<?php namespace Omniship\AustraliaPost\Message;
+<?php namespace Omniship\AustraliaPost\Message\International;
 
 use Omniship\Common\Message\AbstractResponse;
 
-class AustraliaPostServiceResponse extends AbstractResponse
+class AustraliaPostPostageResponse extends AbstractResponse
 {
     /**
      * Is the response successful?

@@ -1,4 +1,4 @@
-<?php namespace Omniship\AustraliaPost\Message;
+<?php namespace Omniship\AustraliaPost\Message\Domestic;
 
 use Omniship\Common\Message\AbstractResponse;
 
