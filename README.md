@@ -66,10 +66,5 @@ print_r($resp->getData());
 
 ## Support
 
-If you are having general issues with Omniship, we suggest posting on
-[Stack Overflow](http://stackoverflow.com/). Be sure to add the
-[omniship tag](http://stackoverflow.com/questions/tagged/omniship) so it can be easily found.
-
-
 If you believe you have found a bug, please report it using the [GitHub issue tracker](https://github.com/cjario/omniship-australia-post/issues),
 or better yet, fork the library and submit a pull request.
