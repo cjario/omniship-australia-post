@@ -9,6 +9,11 @@ class AustraliaPostBoxRequest extends AbstractRequest
 
     protected $endpoint = '/postage/parcel/international/service.json';
 
+
+    /**
+     * @return array
+     * @throws \Omniship\Common\Exception\InvalidRequestException
+     */
     public function getData()
     {
         $this->validate('apiKey');
