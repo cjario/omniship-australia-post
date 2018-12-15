@@ -9,14 +9,51 @@ class AustraliaPostPostageRequest extends AbstractRequest
 
     protected $endpoint = '/postage/parcel/international/calculate.json';
 
-    /**
-     * @return array
-     * @throws InvalidRequestException
-     */
     public function getData()
     {
         $this->validate('apiKey');
-        return [];
+
+        $data = array(
+            "weight"       => $this->getParameter('weight'),
+            "service_code" => $this->getParameter('parcelType'),
+            "country_code" => $this->getParameter('countryCode')
+        );
+
+        return $data;
+    }
+
+    /**
+     * @param  string $value
+     * @return $this
+     */
+    public function setWeight($value)
+    {
+        return $this->setParameter('weight', $value);
+    }
+
+    /**
+     * @return string
+     */
+    public function getWeight()
+    {
+        return $this->getParameter('weight');
+    }
+
+    /**
+     * @param  string $value
+     * @return $this
+     */
+    public function setCountryCode($value)
+    {
+        return $this->setParameter('countryCode', $value);
+    }
+
+    /**
+     * @return string
+     */
+    public function getCountryCode()
+    {
+        return $this->getParameter('countryCode');
     }
 
     /**
@@ -45,14 +82,7 @@ class AustraliaPostPostageRequest extends AbstractRequest
      */
     public function sendData($data)
     {
-        // Set the query params
-        $queryParams = array(
-            "country_code" => $data['country_code'],
-            "weight" => $data['weight'],
-            "service_code" => $this->getParameter('parcelType')
-        );
-
-        $endpoint = $this->endpoint . '?'. http_build_query($queryParams);
+        $endpoint = $this->endpoint . '?' . http_build_query($data);
         $response = $this->sendRequest(self::GET, $endpoint);
         return $this->response = new AustraliaPostPostageResponse($this, $response);
     }

@@ -11,7 +11,7 @@ class AustraliaPostBoxRequest extends AbstractRequest
 
     /**
      * @return array
-     * @throws InvalidRequestException
+     * @throws \Omniship\Common\Exception\InvalidRequestException
      */
     public function getData()
     {

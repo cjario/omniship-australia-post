@@ -17,7 +17,6 @@ class AustraliaPostPostageRequest extends AbstractRequest
     {
         $this->validate('apiKey');
 
-        // Set the query params
         $data = array(
             "from_postcode" => $this->getParameter('fromPostcode'),
             "to_postcode"   => $this->getParameter('toPostcode'),
@@ -27,6 +26,7 @@ class AustraliaPostPostageRequest extends AbstractRequest
             "weight"        => $this->getParameter('weight'),
             "service_code"  => $this->getParameter('parcelType')
         );
+
         return $data;
     }
 
@@ -34,34 +34,34 @@ class AustraliaPostPostageRequest extends AbstractRequest
      * @param  string $value
      * @return $this
      */
-    public function setFromPostCode($value)
+    public function setFromPostcode($value)
     {
-        return $this->setParameter('fromPostCode', $value);
+        return $this->setParameter('fromPostcode', $value);
     }
 
     /**
      * @return string
      */
-    public function getFromPostCode()
+    public function getFromPostcode()
     {
-        return $this->getParameter('fromPostCode');
+        return $this->getParameter('fromPostcode');
     }
 
     /**
      * @param  string $value
      * @return $this
      */
-    public function setToPostCode($value)
+    public function setToPostcode($value)
     {
-        return $this->setParameter('toPostCode', $value);
+        return $this->setParameter('toPostcode', $value);
     }
 
     /**
      * @return string
      */
-    public function getToPostCode()
+    public function getToPostcode()
     {
-        return $this->getParameter('toPostCode');
+        return $this->getParameter('toPostcode');
     }
 
 
