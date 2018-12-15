@@ -11,13 +11,128 @@ class AustraliaPostPostageRequest extends AbstractRequest
 
     /**
      * @return array
-     * @throws InvalidRequestException
+     * @throws \Omniship\Common\Exception\InvalidRequestException
      */
     public function getData()
     {
         $this->validate('apiKey');
-        return [];
+
+        // Set the query params
+        $data = array(
+            "from_postcode" => $this->getParameter('fromPostcode'),
+            "to_postcode"   => $this->getParameter('toPostcode'),
+            "length"        => $this->getParameter('length'),
+            "width"         => $this->getParameter('width'),
+            "height"        => $this->getParameter('height'),
+            "weight"        => $this->getParameter('weight'),
+            "service_code"  => $this->getParameter('parcelType')
+        );
+        return $data;
     }
+
+    /**
+     * @param  string $value
+     * @return $this
+     */
+    public function setFromPostCode($value)
+    {
+        return $this->setParameter('fromPostCode', $value);
+    }
+
+    /**
+     * @return string
+     */
+    public function getFromPostCode()
+    {
+        return $this->getParameter('fromPostCode');
+    }
+
+    /**
+     * @param  string $value
+     * @return $this
+     */
+    public function setToPostCode($value)
+    {
+        return $this->setParameter('toPostCode', $value);
+    }
+
+    /**
+     * @return string
+     */
+    public function getToPostCode()
+    {
+        return $this->getParameter('toPostCode');
+    }
+
+
+    /**
+     * @param  string $value
+     * @return $this
+     */
+    public function setLength($value)
+    {
+        return $this->setParameter('length', $value);
+    }
+
+    /**
+     * @return string
+     */
+    public function getLength()
+    {
+        return $this->getParameter('length');
+    }
+
+    /**
+     * @param  string $value
+     * @return $this
+     */
+    public function setWidth($value)
+    {
+        return $this->setParameter('width', $value);
+    }
+
+    /**
+     * @return string
+     */
+    public function getWidth()
+    {
+        return $this->getParameter('width');
+    }
+
+    /**
+     * @param  string $value
+     * @return $this
+     */
+    public function setHeight($value)
+    {
+        return $this->setParameter('height', $value);
+    }
+
+    /**
+     * @return string
+     */
+    public function getHeight()
+    {
+        return $this->getParameter('height');
+    }
+
+    /**
+     * @param  string $value
+     * @return $this
+     */
+    public function setWeight($value)
+    {
+        return $this->setParameter('weight', $value);
+    }
+
+    /**
+     * @return string
+     */
+    public function getWeight()
+    {
+        return $this->getParameter('weight');
+    }
+
 
     /**
      * @param  string $value
@@ -45,18 +160,7 @@ class AustraliaPostPostageRequest extends AbstractRequest
      */
     public function sendData($data)
     {
-        // Set the query params
-        $queryParams = array(
-            "from_postcode" => $data['fromPostcode'],
-            "to_postcode" => $data['toPostcode'],
-            "length" => $data['parcelLengthInCMs'],
-            "width" => $data['parcelWidthInCMs'],
-            "height" => $data['parcelHeighthInCMs'],
-            "weight" => $data['parcelWeightInKGs'],
-            "service_code" => $this->getParameter('parcelType')
-        );
-
-        $params = $this->endpoint . '?'. http_build_query($queryParams);
+        $params = $this->endpoint . '?' . http_build_query($data);
 
         $response = $this->sendRequest(self::GET, $params);
         return $this->response = new AustraliaPostPostageResponse($this, $response);
