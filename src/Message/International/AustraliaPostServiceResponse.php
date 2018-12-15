@@ -2,7 +2,7 @@
 
 use Omniship\Common\Message\AbstractResponse;
 
-class AustraliaPostBoxResponse extends AbstractResponse
+class AustraliaPostServiceResponse extends AbstractResponse
 {
     /**
      * Is the response successful?
@@ -17,11 +17,4 @@ class AustraliaPostBoxResponse extends AbstractResponse
         return false;
     }
 
-    public function getBoxes()
-    {
-        if (!empty($this->data['sizes'])) {
-            return $this->data;
-        }
-        return null;
-    }
 }

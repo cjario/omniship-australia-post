@@ -3,7 +3,7 @@
 use Omniship\Common\Message\ResponseInterface;
 use Omniship\AustraliaPost\Message\AbstractRequest;
 
-class AustraliaPostBoxRequest extends AbstractRequest
+class AustraliaPostServiceRequest extends AbstractRequest
 {
 
 
@@ -72,6 +72,6 @@ class AustraliaPostBoxRequest extends AbstractRequest
     {
         $endpoint = $this->endpoint . '?'. http_build_query($data);
         $response = $this->sendRequest(self::GET, $endpoint);
-        return $this->response = new AustraliaPostBoxResponse($this, $response);
+        return $this->response = new AustraliaPostServiceResponse($this, $response);
     }
 }

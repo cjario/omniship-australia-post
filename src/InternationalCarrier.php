@@ -68,11 +68,6 @@ class InternationalCarrier extends AbstractCarrier
         return $settings;
     }
 
-    public function box(array $parameters = [])
-    {
-        return $this->createRequest('\Omniship\AustraliaPost\Message\International\AustraliaPostBoxRequest', $parameters);
-    }
-
     public function service(array $parameters = [])
     {
         return $this->createRequest('\Omniship\AustraliaPost\Message\International\AustraliaPostServiceRequest', $parameters);
