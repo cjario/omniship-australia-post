@@ -14,7 +14,7 @@
         }
     },
     "require": {
-        "cjario/omniship-common": "*"
+        "cjario/omniship-common": "^1"
     },
     "require-dev": {
         "squizlabs/php_codesniffer": "^3"
